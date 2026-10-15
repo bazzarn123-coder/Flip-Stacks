@@ -77,6 +77,18 @@
             filter: blur(0.5px);
         }
 
+        /* Target Counter Balls (No Shine) */
+        .target-ball {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            position: relative;
+            flex-shrink: 0;
+            box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.9), 
+                        inset 3px 3px 6px rgba(255, 255, 255, 0.25), 
+                        0 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
         .cube-red { background: radial-gradient(circle at 35% 35%, #f43f5e 0%, #be123c 45%, #881337 75%, #4c0519 100%); }
         .cube-yellow { background: radial-gradient(circle at 35% 35%, #fef08a 0%, #eab308 40%, #ca8a04 70%, #713f12 100%); }
         .cube-black { background: radial-gradient(circle at 35% 35%, #18181b 0%, #09090b 40%, #000000 100%); box-shadow: inset -7px -7px 16px rgba(0, 0, 0, 0.95), inset 4px 4px 10px rgba(255, 255, 255, 0.2), 0 8px 16px rgba(0, 0, 0, 0.7); }
@@ -145,7 +157,7 @@
             </div>
 
             <div class="text-[11px] text-emerald-400/70 font-medium leading-relaxed mt-1">
-                Match matching colored balls, flip stacks, and beat the clock[span_2](start_span)[span_2](end_span)!
+                Match matching colored balls, flip stacks, and beat the clock[span_0](start_span)[span_0](end_span)!
             </div>
         </div>
     </div>
@@ -583,7 +595,7 @@
                 banner.textContent = 'Select Holding Ball & Tap Column to Shoot!';
             }
 
-            // Render Goals with matching round snooker ball icons and larger text
+            // Render Goals with matching round snooker ball icons (no shine) and larger text
             const goalsContainer = document.getElementById('goals-container');
             if (goalsContainer) {
                 goalsContainer.innerHTML = '';
@@ -593,7 +605,7 @@
                     if (remaining > 0) {
                         goalsContainer.innerHTML += `
                             <div class="flex items-center gap-2 bg-emerald-900/80 px-3 py-1.5 rounded-xl border border-emerald-600/50 shadow-sm flex-shrink-0">
-                                <div class="w-6 h-6 cell-block cube-${color}" style="position:relative; left:0; transform:none; height:24px; width:24px;"></div>
+                                <div class="target-ball cube-${color}"></div>
                                 <span class="text-xs sm:text-sm font-black text-emerald-100">${remaining} balls</span>
                             </div>
                         `;
@@ -890,8 +902,8 @@
                 btn.textContent = 'Try Again 🔄';
                 safeBtn.style.display = 'block';
             }
-            modal.classList.remove('hidden');
             modal.classList.add('flex');
+            modal.classList.remove('hidden');
         }
 
         function nextLevel() {
